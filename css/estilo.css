@@ -1,1 +1,11 @@
-
+ul{
+    list-style: none;
+}.btlaranja{
+    background-color: rgb(255, 102, 0);
+}.btroxo{
+    background-color: purple;
+}.btmarrom{
+    background-color: brown;
+}.btlaranja:hover, .btroxo:hover, .btmarrom:hover{
+    opacity: 0.9;
+}
