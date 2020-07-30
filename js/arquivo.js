@@ -17,8 +17,12 @@ function botoeseperguntas(parametro){
 		dois: "Qual a cor da lixeira que é usada para o descarte de lixo radioativo?",
 		respostadois: 8,
 		tres: "Qual a cor da lixeira que é usada para o descarte de objetos feitos em plástico?",
-		respostatres: 2
-	}	
+		respostatres: 2,
+		quatro: "Objetos feitos de vidro devem ser descartados na lixeira de que cor?",
+		respostaquatro: 3,
+		cinco: "Qual a cor da lixeira que devemos descartar resíduos hospitalares e de serviço de saúde?",
+		respostacinco: 7
+	}
 	// Azul 1// Vermelho 2// Verde 3// Amarelo 4// Preto 5
 	// Laranja 6// Branco 7// Roxo 8// Marrom 9// Cinza 10
 	switch(parametro){
@@ -46,6 +50,18 @@ function botoeseperguntas(parametro){
 		case "lixeirasRespostaPerguntaTres":
 			return quizlixeiras.respostatres;
 		break;
+		case "quizlixeirasquatro":
+			return quizlixeiras.quatro;
+		break;
+		case "lixeirasRespostaPerguntaQuatro":
+			return quizlixeiras.respostaquatro;
+		break;
+		case "quizlixeirascinco":
+			return quizlixeiras.cinco;
+		break;
+		case "lixeirasRespostaPerguntaCinco":
+			return quizlixeiras.respostacinco;
+		break;
 	}
 }
 var nomequiz = "";
@@ -63,43 +79,78 @@ function mostraquiz(parametro){
 	}		
 }
 var contaresposta =1;
+var qtderros=0;
 // Azul 1// Vermelho 2// Verde 3// Amarelo 4// Preto 5
 // Laranja 6// Branco 7// Roxo 8// Marrom 9// Cinza 10
 function verificaresposta(cor){
-	switch(nomequiz){
-		case "lixeiras":
-			switch(contaresposta){
-				case 1://primeira resposta primeira pergunta
-					var resposta = botoeseperguntas("lixeirasRespostaPerguntaum");
-					if(cor == resposta){
-						alert("Correto!");
-						document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirasdois");
-						contaresposta = 2;
-					}else{
-						alert("Errou!");
-					}
-				break;
-				case 2:
-					var resposta = botoeseperguntas("lixeirasRespostaPerguntaDois");
-					if(cor == resposta){
-						alert("Correto!");
-						document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirastres");
-						contaresposta = 3;
-					}else{
-						alert("Errou!");
-					}
-				break;
-				case 3:
-					var resposta = botoeseperguntas("lixeirasRespostaPerguntaTres");
-					if(cor == resposta){
-						alert("Correto!");
-						document.getElementById("pergunta").innerHTML="Fim!";
-						// contaresposta = 3;
-					}else{
-						alert("Errou!");
-					}
-				break;
-			}
-		break;
+	if(qtderros === 2){		
+		document.getElementById("pergunta").innerHTML="Errou 3 vezes fim de jogo!";
+		document.getElementById("primeirafilabotoes").innerHTML="";
+		document.getElementById("segundafilabotoes").innerHTML="";
+		qtderros=0;
+	}else{
+		switch(nomequiz){
+			case "lixeiras":
+				switch(contaresposta){
+					case 1://primeira resposta primeira pergunta
+						var resposta = botoeseperguntas("lixeirasRespostaPerguntaum");
+						if(cor == resposta){
+							alert("Correto!");
+							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirasdois");
+							contaresposta = 2;
+						}else{
+							qtderros++;
+							alert("Errou! "+qtderros);						
+						}
+					break;
+					case 2:
+						var resposta = botoeseperguntas("lixeirasRespostaPerguntaDois");
+						if(cor == resposta){
+							alert("Correto!");
+							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirastres");
+							contaresposta = 3;
+						}else{
+							qtderros++;
+							alert("Errou! "+qtderros);
+						}
+					break;
+					case 3:
+						var resposta = botoeseperguntas("lixeirasRespostaPerguntaTres");
+						if(cor == resposta){
+							alert("Correto!");
+							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirasquatro");
+							contaresposta = 4;
+						}else{
+							qtderros++;
+							alert("Errou! "+qtderros);
+						}
+					break;
+					case 4:
+						var resposta = botoeseperguntas("lixeirasRespostaPerguntaQuatro");
+						if(cor == resposta){
+							alert("Correto!");
+							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirascinco");
+							contaresposta = 5;
+						}else{
+							qtderros++;
+							alert("Errou! "+qtderros);
+						}
+					break;
+					case 5:
+						var resposta = botoeseperguntas("lixeirasRespostaPerguntaCinco");
+						if(cor == resposta){
+							alert("Correto!");
+							document.getElementById("pergunta").innerHTML="Fim!";
+							document.getElementById("primeirafilabotoes").innerHTML="";
+							document.getElementById("segundafilabotoes").innerHTML="";
+							// contaresposta = 4;
+						}else{
+							qtderros++;
+							alert("Errou! "+qtderros);
+						}
+					break;
+				}
+			break;
+		}
 	}
 }
