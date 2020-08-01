@@ -65,21 +65,35 @@ function botoeseperguntas(parametro){
 	}
 }
 var nomequiz = "";
-function mostraquiz(parametro){
-	nomequiz = parametro;		
-	switch(parametro){
-		case "lixeiras":
-			contaresposta =1;
-			document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeiras");
-			document.getElementById("primeirafilabotoes").innerHTML=botoeseperguntas("botoesum");
-			document.getElementById("segundafilabotoes").innerHTML=botoeseperguntas("botoesdois");
-		break;
-		// case "meioambiente":
-		// break;
-	}		
-}
+var toggle = 0;
+var nivel=0;
 var contaresposta =1;
 var qtderros=0;
+function mostraquiz(parametro){
+	nomequiz = parametro;	
+	if(toggle == 1){
+		document.getElementById("pergunta").innerHTML="";
+		document.getElementById("primeirafilabotoes").innerHTML="";
+		document.getElementById("segundafilabotoes").innerHTML="";
+		document.getElementById("nivel").innerHTML="";
+		toggle=0;
+		nivel=0;
+	}else{
+		switch(parametro){
+			case "lixeiras":
+				contaresposta =1;
+				document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeiras");
+				document.getElementById("primeirafilabotoes").innerHTML=botoeseperguntas("botoesum");
+				document.getElementById("segundafilabotoes").innerHTML=botoeseperguntas("botoesdois");
+				document.getElementById("nivel").innerHTML="<h1>Nível 0</h1>";
+			break;
+			// case "meioambiente":
+			// break;
+		}	
+		toggle=1;
+	}
+		
+}
 // Azul 1// Vermelho 2// Verde 3// Amarelo 4// Preto 5
 // Laranja 6// Branco 7// Roxo 8// Marrom 9// Cinza 10
 function verificaresposta(cor){
@@ -87,7 +101,9 @@ function verificaresposta(cor){
 		document.getElementById("pergunta").innerHTML="Errou 3 vezes fim de jogo!";
 		document.getElementById("primeirafilabotoes").innerHTML="";
 		document.getElementById("segundafilabotoes").innerHTML="";
-		qtderros=0;
+		document.getElementById("nivel").innerHTML="";
+		qtderros=0;		
+		nivel=0;
 	}else{
 		switch(nomequiz){
 			case "lixeiras":
@@ -96,6 +112,8 @@ function verificaresposta(cor){
 						var resposta = botoeseperguntas("lixeirasRespostaPerguntaum");
 						if(cor == resposta){
 							alert("Correto!");
+							nivel++;							
+							document.getElementById("nivel").innerHTML="<h1>Nível "+nivel+"</h1>";
 							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirasdois");
 							contaresposta = 2;
 						}else{
@@ -107,6 +125,8 @@ function verificaresposta(cor){
 						var resposta = botoeseperguntas("lixeirasRespostaPerguntaDois");
 						if(cor == resposta){
 							alert("Correto!");
+							nivel++;							
+							document.getElementById("nivel").innerHTML="<h1>Nível "+nivel+"</h1>";
 							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirastres");
 							contaresposta = 3;
 						}else{
@@ -118,6 +138,8 @@ function verificaresposta(cor){
 						var resposta = botoeseperguntas("lixeirasRespostaPerguntaTres");
 						if(cor == resposta){
 							alert("Correto!");
+							nivel++;							
+							document.getElementById("nivel").innerHTML="<h1>Nível "+nivel+"</h1>";
 							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirasquatro");
 							contaresposta = 4;
 						}else{
@@ -129,6 +151,8 @@ function verificaresposta(cor){
 						var resposta = botoeseperguntas("lixeirasRespostaPerguntaQuatro");
 						if(cor == resposta){
 							alert("Correto!");
+							nivel++;							
+							document.getElementById("nivel").innerHTML="<h1>Nível "+nivel+"</h1>";
 							document.getElementById("pergunta").innerHTML=botoeseperguntas("quizlixeirascinco");
 							contaresposta = 5;
 						}else{
@@ -140,9 +164,12 @@ function verificaresposta(cor){
 						var resposta = botoeseperguntas("lixeirasRespostaPerguntaCinco");
 						if(cor == resposta){
 							alert("Correto!");
+							nivel++;
 							document.getElementById("pergunta").innerHTML="Fim!";
 							document.getElementById("primeirafilabotoes").innerHTML="";
 							document.getElementById("segundafilabotoes").innerHTML="";
+							document.getElementById("nivel").innerHTML="";
+							nivel=0;
 							// contaresposta = 4;
 						}else{
 							qtderros++;
